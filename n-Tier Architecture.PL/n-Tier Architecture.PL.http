@@ -1,0 +1,6 @@
+@n_Tier_Architecture.PL_HostAddress = http://localhost:5137
+
+GET {{n_Tier_Architecture.PL_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
