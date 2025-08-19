@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace n_Tier_Architecture.DAL.DTO.Requests
 {
-    public class CategoryRequest
+    public class BrandRequest
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
     }
 }

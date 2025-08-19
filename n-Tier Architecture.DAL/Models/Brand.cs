@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace n_Tier_Architecture.DAL.DTO.Requests
+namespace n_Tier_Architecture.DAL.Models
 {
-    public class CategoryRequest
+    public class Brand:BaseModel
     {
-        public int Id { get; set; }
         public string Name { get; set; }
     }
 }
