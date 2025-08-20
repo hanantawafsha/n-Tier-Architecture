@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace n_Tier_Architecture.DAL.Models
+namespace n_Tier_Architecture.DAL.Utilities
 {
-    public class Brand:BaseModel
+    public interface ISeedData
     {
-        public string Name { get; set; }
-
+        void DataSeeding();
     }
 }

@@ -5,6 +5,7 @@ using n_Tier_Architecture.BLL.Services.Interfaces;
 using n_Tier_Architecture.DAL.Data;
 using n_Tier_Architecture.DAL.Repositories.Classes;
 using n_Tier_Architecture.DAL.Repositories.Interfaces;
+using n_Tier_Architecture.DAL.Utilities;
 using Scalar;
 using Scalar.AspNetCore;
 namespace n_Tier_Architecture.PL
@@ -28,6 +29,8 @@ namespace n_Tier_Architecture.PL
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IBrandRepository, BrandRepository>();
             builder.Services.AddScoped<IBrandService, BrandService>();
+            builder.Services.AddScoped<ISeedData, SeedData>();
+
 
 
 
@@ -43,6 +46,10 @@ namespace n_Tier_Architecture.PL
                 app.MapOpenApi();
                 app.MapScalarApiReference();
             }
+            //
+            var scope = app.Services.CreateScope();
+            var objectOfSeedData=scope.ServiceProvider.GetRequiredService<ISeedData>();
+            objectOfSeedData.DataSeeding();
 
             app.UseHttpsRedirection();
 
