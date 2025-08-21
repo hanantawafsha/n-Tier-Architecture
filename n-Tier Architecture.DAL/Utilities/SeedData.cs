@@ -38,27 +38,27 @@ namespace n_Tier_Architecture.DAL.Utilities
                     );
 
             }
-            if (_context.Brands.Any())
-            {
-                _context.Brands.AddRange(
-                    new Brand
-                    {
-                        Name = "Adidas"
-                    },
-                    new Brand
-                    {
-                        Name = "Apple"
-                    },
-                    new Brand
-                    {
-                        Name = "Samsung"
-                    },
-                    new Brand
-                    {
-                        Name = "Nike"
-                    }
-                    );
-            }
+            //if (_context.Brands.Any())
+            //{
+            //    _context.Brands.AddRange(
+            //        new Brand
+            //        {
+            //            Name = "Adidas"
+            //        },
+            //        new Brand
+            //        {
+            //            Name = "Apple"
+            //        },
+            //        new Brand
+            //        {
+            //            Name = "Samsung"
+            //        },
+            //        new Brand
+            //        {
+            //            Name = "Nike"
+            //        }
+            //        );
+            //}
             _context.SaveChanges();
         }
     }

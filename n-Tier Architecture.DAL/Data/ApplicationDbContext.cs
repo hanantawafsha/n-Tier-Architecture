@@ -26,19 +26,21 @@ namespace n_Tier_Architecture.DAL.Data
         {
             base.OnModelCreating(builder);
 
-            // rename identty tables 
-            builder.Entity<Category>().ToTable("Categories");
-            builder.Entity<Brand>().ToTable("Brands");
-            builder.Entity<Address>().ToTable("Addresses");
-
+            // Rename Identity tables
             builder.Entity<ApplicationUser>().ToTable("Users");
             builder.Entity<IdentityRole>().ToTable("Roles");
             builder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
+
             //ignore tables
             builder.Ignore<IdentityUserClaim<string>>();
             builder.Ignore<IdentityUserLogin<string>>();
             builder.Ignore<IdentityUserToken<string>>();
             builder.Ignore<IdentityRoleClaim<string>>();
+
+
+            // Custom tables
+            builder.Entity<Category>().ToTable("Categories");
+            builder.Entity<Brand>().ToTable("Brands");
         }
     }
 }

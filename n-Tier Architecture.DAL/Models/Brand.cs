@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace n_Tier_Architecture.DAL.Models
 {
-    public class Brand:BaseModel
+    public class Brand : BaseModel
     {
         public string Name { get; set; }
-
     }
 }
