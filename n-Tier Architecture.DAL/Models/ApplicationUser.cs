@@ -11,6 +11,9 @@ namespace n_Tier_Architecture.DAL.Models
     public class ApplicationUser:IdentityUser
     {
         public string FullName { get; set; }
-        public Address Address { get; set; }
+        public string? CodeResetPassword { get; set; }
+        public Address? Address { get; set; }
+        public DateTime?   PasswordResetCodeExpire { get; set; }  
+
     }
 }

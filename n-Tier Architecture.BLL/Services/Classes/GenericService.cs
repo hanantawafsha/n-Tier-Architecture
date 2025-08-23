@@ -33,10 +33,15 @@ namespace n_Tier_Architecture.BLL.Services.Classes
             return _genericRepository.Delete(entity);
         }
 
-        public IEnumerable<TResponse> GetAll()
+        public IEnumerable<TResponse> GetAll(bool onlyActive = false)
         {
             var entity = _genericRepository.GetAll();
+            if (onlyActive)
+            {
+                entity = entity.Where(e => e.Status ==Status.Active);
+            }
             return entity.Adapt<IEnumerable<TResponse>>();
+
                 }
 
         public TResponse? GetById(int id)

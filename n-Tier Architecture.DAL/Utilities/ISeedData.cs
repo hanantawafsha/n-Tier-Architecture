@@ -8,6 +8,7 @@ namespace n_Tier_Architecture.DAL.Utilities
 {
     public interface ISeedData
     {
-        void DataSeeding();
+        Task DataSeedingAsync();
+        Task IdentityDataSeedingAsync();
     }
 }

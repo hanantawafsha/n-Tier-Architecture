@@ -9,11 +9,11 @@ using n_Tier_Architecture.DAL.Data;
 
 #nullable disable
 
-namespace n_Tier_Architecture.DAL.Data.Migrations
+namespace n_Tier_Architecture.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250820190746_updateTablesName2")]
-    partial class updateTablesName2
+    [Migration("20250823220548_update user data")]
+    partial class updateuserdata
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -102,8 +102,11 @@ namespace n_Tier_Architecture.DAL.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int>("AddressId")
+                    b.Property<int?>("AddressId")
                         .HasColumnType("int");
+
+                    b.Property<string>("CodeResetPassword")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -136,6 +139,9 @@ namespace n_Tier_Architecture.DAL.Data.Migrations
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("PasswordResetCodeExpire")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
@@ -233,9 +239,7 @@ namespace n_Tier_Architecture.DAL.Data.Migrations
                 {
                     b.HasOne("n_Tier_Architecture.DAL.Models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AddressId");
 
                     b.Navigation("Address");
                 });

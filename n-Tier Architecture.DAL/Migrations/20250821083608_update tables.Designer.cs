@@ -9,11 +9,11 @@ using n_Tier_Architecture.DAL.Data;
 
 #nullable disable
 
-namespace n_Tier_Architecture.DAL.Data.Migrations
+namespace n_Tier_Architecture.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250820184220_branfs")]
-    partial class branfs
+    [Migration("20250821083608_update tables")]
+    partial class updatetables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -91,7 +91,7 @@ namespace n_Tier_Architecture.DAL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Addresses");
+                    b.ToTable("Addresses", (string)null);
                 });
 
             modelBuilder.Entity("n_Tier_Architecture.DAL.Models.ApplicationUser", b =>
@@ -188,7 +188,7 @@ namespace n_Tier_Architecture.DAL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands");
+                    b.ToTable("Brands", (string)null);
                 });
 
             modelBuilder.Entity("n_Tier_Architecture.DAL.Models.Category", b =>
@@ -211,7 +211,7 @@ namespace n_Tier_Architecture.DAL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>

@@ -9,11 +9,11 @@ using n_Tier_Architecture.DAL.Data;
 
 #nullable disable
 
-namespace n_Tier_Architecture.DAL.Data.Migrations
+namespace n_Tier_Architecture.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250820161401_user manager - identity")]
-    partial class usermanageridentity
+    [Migration("20250822082843_update user address")]
+    partial class updateuseraddress
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -91,7 +91,7 @@ namespace n_Tier_Architecture.DAL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Addresses");
+                    b.ToTable("Addresses", (string)null);
                 });
 
             modelBuilder.Entity("n_Tier_Architecture.DAL.Models.ApplicationUser", b =>
@@ -102,7 +102,7 @@ namespace n_Tier_Architecture.DAL.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int>("AddressId")
+                    b.Property<int?>("AddressId")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -188,7 +188,7 @@ namespace n_Tier_Architecture.DAL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands");
+                    b.ToTable("Brands", (string)null);
                 });
 
             modelBuilder.Entity("n_Tier_Architecture.DAL.Models.Category", b =>
@@ -211,7 +211,7 @@ namespace n_Tier_Architecture.DAL.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -233,9 +233,7 @@ namespace n_Tier_Architecture.DAL.Data.Migrations
                 {
                     b.HasOne("n_Tier_Architecture.DAL.Models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AddressId");
 
                     b.Navigation("Address");
                 });

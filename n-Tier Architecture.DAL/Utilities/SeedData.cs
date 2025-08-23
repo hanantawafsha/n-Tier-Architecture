@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using n_Tier_Architecture.DAL.Data;
 using n_Tier_Architecture.DAL.Models;
 using System;
@@ -12,21 +14,27 @@ namespace n_Tier_Architecture.DAL.Utilities
     public class SeedData : ISeedData
     {
         private readonly ApplicationDbContext _context;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public SeedData(ApplicationDbContext context)
+        public SeedData(ApplicationDbContext context,
+            RoleManager<IdentityRole> roleManager,
+            UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _roleManager = roleManager;
+            _userManager = userManager;
         }
-        public void DataSeeding()
+        public async Task DataSeedingAsync()
         {
-            if(_context.Database.GetPendingMigrations().Any())
+            if ((await _context.Database.GetPendingMigrationsAsync()).Any())
             {
-                _context.Database.Migrate();
+                await _context.Database.MigrateAsync();
             }
 
-            if(_context.Categories.Any())
+            if(! await _context.Categories.AnyAsync())
             {
-                _context.Categories.AddRange(
+               await _context.Categories.AddRangeAsync(
                     new Category
                     {
                         Name="Clothes"
@@ -38,28 +46,85 @@ namespace n_Tier_Architecture.DAL.Utilities
                     );
 
             }
-            //if (_context.Brands.Any())
-            //{
-            //    _context.Brands.AddRange(
-            //        new Brand
-            //        {
-            //            Name = "Adidas"
-            //        },
-            //        new Brand
-            //        {
-            //            Name = "Apple"
-            //        },
-            //        new Brand
-            //        {
-            //            Name = "Samsung"
-            //        },
-            //        new Brand
-            //        {
-            //            Name = "Nike"
-            //        }
-            //        );
-            //}
-            _context.SaveChanges();
+            if (! await _context.Brands.AnyAsync())
+            {
+                await _context.Brands.AddRangeAsync(
+                    new Brand
+                    {
+                        Name = "Adidas"
+                    },
+                    new Brand
+                    {
+                        Name = "Apple"
+                    },
+                    new Brand
+                    {
+                        Name = "Samsung"
+                    },
+                    new Brand
+                    {
+                        Name = "Nike"
+                    }
+                    );
+            }
+            await _context.SaveChangesAsync();
         }
+
+        public async Task IdentityDataSeedingAsync()
+        {
+            if(! await _roleManager.Roles.AnyAsync())
+            {
+              await  _roleManager.CreateAsync(
+                    new IdentityRole("Admin"));
+                await _roleManager.CreateAsync(
+                    new IdentityRole("SuperAdmin"));
+                await _roleManager.CreateAsync(
+                    new IdentityRole("Customer"));
+            }
+            if (! await _userManager.Users.AnyAsync())
+            {
+                var user1 = new ApplicationUser()
+                {
+                    Email = "hananjtawafsha@gmail.com",
+                    FullName = "Hanan Admin",
+                    PhoneNumber = "0598458868",
+                    UserName = "htawafshaAdmin",
+                    EmailConfirmed = true,
+
+                };
+                var user2 = new ApplicationUser()
+                {
+                    Email = "hanantawafsha@gmail.com",
+                    FullName = "Hanan Super Admin",
+                    PhoneNumber = "0598458868",
+                    UserName = "htawafshaSAdmin",
+                    EmailConfirmed = true,
+
+                };
+                var user3 = new ApplicationUser()
+                {
+                    Email = "htawafsha@outlook.com",
+                    FullName = "Hanan Custom",
+                    PhoneNumber = "0598458868",
+                    UserName = "htawafshacCustomer",
+                    EmailConfirmed = true,
+
+                };
+
+                await _userManager.CreateAsync(user1,"Hanan@123" );
+                await _userManager.CreateAsync(user2, "Hanan@123");
+                await _userManager.CreateAsync(user3, "Hanan@123");
+
+                await _userManager.AddToRoleAsync(user1, "Admin");
+                await _userManager.AddToRoleAsync(user2, "SuperAdmin");
+                await _userManager.AddToRoleAsync(user3, "Customer");
+
+
+            }
+            await _context.SaveChangesAsync();
+        }
+
+
+        
     }
 }

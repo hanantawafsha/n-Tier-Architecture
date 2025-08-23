@@ -2,11 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using n_Tier_Architecture.DAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace n_Tier_Architecture.DAL.Data
 {
@@ -17,7 +13,9 @@ namespace n_Tier_Architecture.DAL.Data
         public DbSet<Address> Addresses { get; set; }
 
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) 
+            : base(options)
         {
         }
 
@@ -41,6 +39,7 @@ namespace n_Tier_Architecture.DAL.Data
             // Custom tables
             builder.Entity<Category>().ToTable("Categories");
             builder.Entity<Brand>().ToTable("Brands");
+            builder.Entity<Address>().ToTable("Addresses");
         }
     }
 }
