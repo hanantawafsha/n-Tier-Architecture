@@ -1,4 +1,5 @@
-﻿using System;
+﻿using n_Tier_Architecture.DAL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace n_Tier_Architecture.DAL.DTO.Responses
 {
-    public class BrandResponse
+    public class ProductResponse
     {
-        public int Id { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
         [JsonIgnore]
         public string MainImage { get; set; }
         public string MainImageUrl => $"https://localhost:7084/images/{MainImage}";

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,8 @@ namespace n_Tier_Architecture.DAL.DTO.Requests
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public IFormFile MainImage { get; set; }
+
 
     }
 }

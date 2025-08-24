@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using n_Tier_Architecture.BLL.Services.Classes;
 using n_Tier_Architecture.BLL.Services.Interfaces;
 using n_Tier_Architecture.DAL.DTO.Requests;
 
@@ -32,29 +33,32 @@ namespace n_Tier_Architecture.PL.Areas.Admin.Controllers
             return Ok(brand);
         }
         [HttpPost]
-        public IActionResult Create([FromBody] BrandRequest request)
+        public async Task<IActionResult> Create([FromForm] BrandRequest request)
         {
-            var id = _brandService.Create(request);
-            return CreatedAtAction(nameof(Get), new { id });
-        }
-        [HttpPatch("{id}")]
-        public IActionResult Update([FromRoute] int id, [FromBody] BrandRequest request)
-        {
-            var updated = _brandService.Update(id, request);
-            return updated > 0 ? Ok() : NotFound();
-        }
-        [HttpPatch("ToggleStatus/{id}")]
-        public IActionResult ToggleStatus([FromRoute] int id)
-        {
-            var updated = _brandService.ToggleStatus(id);
-            return updated ? Ok(new { message = "Status togglled" }) : NotFound(new { message = "Categroy not found" });
-        }
+            var result = await _brandService.CreateFile(request);
+            return Ok(result);
 
-        [HttpDelete("{id}")]
-        public IActionResult Delete([FromRoute] int id)
-        {
-            var deleted = _brandService.Delete(id);
-            return deleted > 0 ? Ok() : NotFound();
+           // var id = _brandService.CreateFile(request);
+           // return CreatedAtAction(nameof(Get), new { id });
         }
+        //[HttpPatch("{id}")]
+        //public IActionResult Update([FromRoute] int id, [FromBody] BrandRequest request)
+        //{
+        //    var updated = _brandService.Update(id, request);
+        //    return updated > 0 ? Ok() : NotFound();
+        //}
+        //[HttpPatch("ToggleStatus/{id}")]
+        //public IActionResult ToggleStatus([FromRoute] int id)
+        //{
+        //    var updated = _brandService.ToggleStatus(id);
+        //    return updated ? Ok(new { message = "Status togglled" }) : NotFound(new { message = "Categroy not found" });
+        //}
+
+        //[HttpDelete("{id}")]
+        //public IActionResult Delete([FromRoute] int id)
+        //{
+        //    var deleted = _brandService.Delete(id);
+        //    return deleted > 0 ? Ok() : NotFound();
+        //}
     }
 }

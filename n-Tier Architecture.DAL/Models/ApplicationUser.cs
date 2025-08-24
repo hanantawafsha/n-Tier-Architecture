@@ -12,6 +12,7 @@ namespace n_Tier_Architecture.DAL.Models
     {
         public string FullName { get; set; }
         public string? CodeResetPassword { get; set; }
+        public int? AddressId { get; set; }  
         public Address? Address { get; set; }
         public DateTime?   PasswordResetCodeExpire { get; set; }  
 

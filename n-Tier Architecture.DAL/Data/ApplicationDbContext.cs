@@ -11,6 +11,7 @@ namespace n_Tier_Architecture.DAL.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Product> Products { get; set; }
 
 
 

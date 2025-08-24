@@ -21,4 +21,14 @@
     <ProjectReference Include="..\n-Tier Architecture.BLL\n-Tier Architecture.BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\437f2d05-46ba-45a6-9275-f63f7d9be31f.jpeg" />
+    <None Include="wwwroot\images\9c0ebd6d-b29d-400e-afc2-1665c866e8be.png" />
+    <None Include="wwwroot\images\c2613686-4282-4a9d-bbd3-9a0b4baa0f95.png" />
+  </ItemGroup>
+
 </Project>

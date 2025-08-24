@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using n_Tier_Architecture.BLL.Services.Classes;
 using n_Tier_Architecture.BLL.Services.Interfaces;
@@ -33,19 +34,32 @@ namespace n_Tier_Architecture.PL
            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             // Add Identity
-            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>(Options =>
+            {
+                Options.Password.RequiredLength = 8;
+                Options.Password.RequireNonAlphanumeric = false;
+                Options.Password.RequireDigit = true;
+                Options.Password.RequireLowercase = true;
+                Options.User.RequireUniqueEmail = true;
+
+            })
                 .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-            builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IBrandRepository, BrandRepository>();
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IBrandService, BrandService>();
+            builder.Services.AddScoped<IProductService,ProductService>();
+
             builder.Services.AddScoped<ISeedData, SeedData>();
             builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
             builder.Services.AddScoped<IEmailSender, EmailSetting>();
+            builder.Services.AddScoped<IFileService, FileService>();
 
 
-            
+
 
 
 
@@ -89,8 +103,8 @@ namespace n_Tier_Architecture.PL
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
-
+            // static url - images
+            app.UseStaticFiles();
             app.MapControllers();
 
             app.Run();
