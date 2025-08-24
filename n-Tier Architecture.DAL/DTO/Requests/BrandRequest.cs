@@ -9,7 +9,6 @@ namespace n_Tier_Architecture.DAL.DTO.Requests
 {
     public class BrandRequest
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public IFormFile MainImage { get; set; }
 
