@@ -12,6 +12,7 @@ namespace n_Tier_Architecture.DAL.Data
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Cart> Carts { get; set; }
 
 
 
@@ -29,6 +30,7 @@ namespace n_Tier_Architecture.DAL.Data
             builder.Entity<ApplicationUser>().ToTable("Users");
             builder.Entity<IdentityRole>().ToTable("Roles");
             builder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
+
 
             //ignore tables
             builder.Ignore<IdentityUserClaim<string>>();
