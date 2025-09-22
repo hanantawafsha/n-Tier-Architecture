@@ -1,5 +1,6 @@
 ﻿using n_Tier_Architecture.BLL.Services.Interfaces;
 using n_Tier_Architecture.DAL.DTO.Requests;
+using n_Tier_Architecture.DAL.DTO.Responses;
 using n_Tier_Architecture.DAL.Models;
 using n_Tier_Architecture.DAL.Repositories.Interfaces;
 using System;
@@ -18,7 +19,9 @@ namespace n_Tier_Architecture.BLL.Services.Classes
         {
             _cartRepository = cartRepository;
         }
-        public bool AddToCart(CartRequest request, string UserId)
+
+
+        public async Task<bool> AddToCartAsync(CartRequest request, string UserId)
         {
             var NewItem = new Cart
             {
@@ -26,7 +29,32 @@ namespace n_Tier_Architecture.BLL.Services.Classes
                 UserId  = UserId,
                 Count = 1
             };
-            return _cartRepository.Add(NewItem)>0;
+            return await _cartRepository.AddAsync(NewItem)>0;
         }
+
+        public Task<bool> ClearCartAsync(string UserId)
+        {
+            return _cartRepository.ClearCartAsync(UserId);
+
+        }
+
+        public async Task<CartSummeryResponse> GetCartSummeryAsync(string UserId)
+        {
+            var cartItems =await _cartRepository.GetUserCartAsync(UserId);
+            var response =  new CartSummeryResponse
+            {
+                Items = cartItems.Select(ci => new CartResponse
+                {
+                    ProductId=ci.ProductId,
+                    ProductName = ci.Product.Name,
+                    Price = ci.Product.Price,
+                    Count = ci.Count
+                } ).ToList()
+            };
+            return response;
+
+        }
+
+       
     }
 }

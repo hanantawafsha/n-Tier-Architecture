@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace n_Tier_Architecture.DAL.Repositories.Interfaces
 {
-    public interface IProductRepository:IGenericRepository<Product>
+    public interface IOrderItemRepository
     {
-        Task DescreaseQuantityAsync(List<(int productId, int quantity)>items);
+        Task AddRangeAsync(List <OrderItem> items);
     }
 }

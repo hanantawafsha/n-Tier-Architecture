@@ -20,11 +20,20 @@ namespace n_Tier_Architecture.PL.Areas.Customer.Controllers
             _cartService = cartService;
         }
         [HttpPost("")]
-        public IActionResult AddToCart(CartRequest cartRequest)
+        public async Task<IActionResult> AddToCartAsync(CartRequest cartRequest)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var result = _cartService.AddToCart(cartRequest, userId);
+            var result = await _cartService.AddToCartAsync(cartRequest, userId);
             return result ? Ok(new { message = "added to Cart Successfully" }) :BadRequest();
+        }
+
+        [HttpGet("")]
+        public async Task<IActionResult> GetUserCartAsync()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var result = await _cartService.GetCartSummeryAsync(userId);
+            return Ok(result);
+
         }
     }
 }

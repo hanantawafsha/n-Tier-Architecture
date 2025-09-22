@@ -5,6 +5,8 @@ namespace n_Tier_Architecture.DAL.Repositories.Interfaces
 {
     public interface ICartRepository
     {
-        int Add(Cart cart);
+       Task<int> AddAsync(Cart cart);
+        Task<List<Cart>> GetUserCartAsync(string UserId);
+        Task<bool> ClearCartAsync(string UserId);
     }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Azure.Core;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -21,14 +23,17 @@ namespace n_Tier_Architecture.BLL.Services.Classes
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IConfiguration _configuration;
         private readonly IEmailSender _emailSender;
+        private readonly SignInManager<ApplicationUser> _singInManager;
 
         public AuthenticationService( UserManager<ApplicationUser> userManager,
             IConfiguration configuration,
-            IEmailSender emailSender) 
+            IEmailSender emailSender,
+            SignInManager<ApplicationUser> singInManager) 
         {
             _userManager = userManager;
             _configuration = configuration;
             _emailSender = emailSender;
+            _singInManager = singInManager;
         }
         public async Task<UserResponse> LoginAsync(LoginRequest loginRequest)
         {
@@ -38,22 +43,28 @@ namespace n_Tier_Architecture.BLL.Services.Classes
                 throw new Exception("Invalid email or password");
             }
 
-            if (!await _userManager.IsEmailConfirmedAsync(user))
+            var result = await _singInManager.CheckPasswordSignInAsync(user, loginRequest.Password,true);
+            if (result.Succeeded)
             {
-                throw new Exception("Please confirm your email");
-            
+                return new UserResponse
+                {
+                    Token = await CreateTokenAsync(user)
+                };
             }
-
-            var isValid=await _userManager.CheckPasswordAsync(user, loginRequest.Password);
-            if (!isValid)
+            else if (result.IsLockedOut)
+            {
+                throw new Exception("your account is locked");
+            }
+            //confirmed email
+            else if (result.IsNotAllowed)
+            {
+                throw new Exception("please confirm your email");
+            }
+            else
             {
                 throw new Exception("Invalid email or password");
+
             }
-            return new UserResponse
-            {
-                Token = await CreateTokenAsync(user),
-            };
-        
         }
 
         public async Task<string> ConfirmEmail(string token, string userId)
@@ -71,7 +82,7 @@ namespace n_Tier_Architecture.BLL.Services.Classes
 
             return "email confirmation failed";
         }
-        public async Task<UserResponse> RegisterAsync(RegisterRequest reqisterRequest)
+        public async Task<UserResponse> RegisterAsync(RegisterRequest reqisterRequest, HttpRequest httpRequest)
         {
             var user = new ApplicationUser()
             {
@@ -85,10 +96,12 @@ namespace n_Tier_Architecture.BLL.Services.Classes
             {
                 var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 var escapeToken = Uri.EscapeDataString(token);
-                var emailurl = $"https://localhost:7084/api/identity/Accounts/ConfirmEmail?token={escapeToken}&userid={user.Id}";
+                var emailurl = $"{httpRequest.Scheme}://{httpRequest.Host}/api/identity/Accounts/ConfirmEmail?token={escapeToken}&userid={user.Id}";
                 await _emailSender.SendEmailAsync(user.Email, "NTier Shop - Confrim your email",$"<h1> Hello {user.UserName}</h1>" +
                     $"<a href='{emailurl}'> confirm </a>");
 
+                //add customer role to the created users
+                await _userManager.AddToRoleAsync(user, "Customer");
                 return new UserResponse()
                 {
                     Token = reqisterRequest.Email

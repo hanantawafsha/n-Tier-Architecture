@@ -1,4 +1,5 @@
 ﻿using n_Tier_Architecture.DAL.DTO.Requests;
+using n_Tier_Architecture.DAL.DTO.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace n_Tier_Architecture.BLL.Services.Interfaces
 {
     public interface ICartService
     {
-        bool AddToCart(CartRequest request, string UserId);
+        Task<bool> AddToCartAsync(CartRequest request, string UserId);
+        Task<CartSummeryResponse> GetCartSummeryAsync(string UserId);
+        Task<bool> ClearCartAsync(string UserId);
     }
 }

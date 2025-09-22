@@ -51,19 +51,27 @@ namespace n_Tier_Architecture.DAL.Utilities
                 await _context.Brands.AddRangeAsync(
                     new Brand
                     {
-                        Name = "Adidas"
+                        Name = "Adidas",
+                        MainImage= "medcor.png"
                     },
                     new Brand
                     {
-                        Name = "Apple"
+                        Name = "Apple",
+                        MainImage = "medcor.png",
+                        
+
+
                     },
                     new Brand
                     {
-                        Name = "Samsung"
+                        Name = "Samsung",
+                        MainImage= "QR-Code.png"
+
                     },
                     new Brand
                     {
-                        Name = "Nike"
+                        Name = "Nike",
+                        MainImage = "QR-Code.png"
                     }
                     );
             }
