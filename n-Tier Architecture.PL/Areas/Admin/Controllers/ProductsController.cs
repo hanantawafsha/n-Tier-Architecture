@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using n_Tier_Architecture.BLL.Services.Classes;
 using n_Tier_Architecture.BLL.Services.Interfaces;
 using n_Tier_Architecture.DAL.DTO.Requests;
+using n_Tier_Architecture.DAL.DTO.Responses;
 using System.Security.Claims;
 
 namespace n_Tier_Architecture.PL.Areas.Admin.Controllers
@@ -23,12 +24,16 @@ namespace n_Tier_Architecture.PL.Areas.Admin.Controllers
         [HttpPost("")]
         public async Task<IActionResult> Create([FromForm] ProductRequest request)
         {
-            var result = await _productService.CreateFile(request);
+            var result = await _productService.CreateProduct(request);
             return Ok(result);
 
         }
         [HttpGet("")]
-        public IActionResult GetAll() => Ok(_productService.GetAll());
+        public async Task<ActionResult<List<ProductResponse>>> GetAllProductsAsync()
+        {
+            var products = await _productService.GelAllProductsAsync(Request);
+            return Ok(products);
+        }
 
         [HttpGet("{id}")]
         public IActionResult Get([FromRoute] int id)

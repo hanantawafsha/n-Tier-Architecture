@@ -33,8 +33,10 @@ namespace n_Tier_Architecture.DAL.Repositories.Classes
                 product.Quantity -= item.quantity;
             }
             await _context.SaveChangesAsync();
-           
-
+        }
+        public async Task<List<Product>> GelAllProductsWithImageAsync()
+        {
+            return await _context.Products.Include(p=>p.SubImages).ToListAsync();
         }
     }
 }

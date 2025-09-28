@@ -1,6 +1,7 @@
 ﻿using Azure;
 using Azure.Core;
 using Mapster;
+using Microsoft.AspNetCore.Http;
 using n_Tier_Architecture.BLL.Services.Interfaces;
 using n_Tier_Architecture.DAL.DTO.Requests;
 using n_Tier_Architecture.DAL.DTO.Responses;
@@ -25,7 +26,7 @@ namespace n_Tier_Architecture.BLL.Services.Classes
             _fileService = fileService;
         }
 
-        public async Task<int> CreateFile(ProductRequest request)
+        public async Task<int> CreateProduct(ProductRequest request)
         {
             var product = request.Adapt<Product>();
             product.Name = request.Name;
@@ -36,9 +37,34 @@ namespace n_Tier_Architecture.BLL.Services.Classes
                var filePath = await _fileService.UploadAsync(request.MainImage);
                 product.MainImage =  filePath;
             }
+            if(request.SubImages !=null)
+            {
+                var subImagesPath = await _fileService.UploadManyAsync(request.SubImages);
+               //question
+                product.SubImages = subImagesPath.Select(img => new ProductImage
+                {
+                    ImageName = img
+                }).ToList();
+            }
             return _repository.Add(product);
         }
         
+        public async Task<List<ProductResponse>> GelAllProductsAsync(HttpRequest request,bool onlyActive=false)
+        {
+            var products = await _repository.GelAllProductsWithImageAsync();
+
+            if(onlyActive)
+            {
+                products=products.Where(p=>p.Status==Status.Active).ToList();
+            }
+            return products.Select(p => new ProductResponse
+            {
+                Name = p.Name,
+                Quantity = p.Quantity,
+                MainImageUrl = $"{request.Scheme}://{request.Host}/Images/{p.MainImage}",
+                SubImagesUrl = p.SubImages.Select(img => $"{request.Scheme}://{request.Host}/Images/{img.ImageName}").ToList()
+            }).ToList();
+        }
 
     }
 }

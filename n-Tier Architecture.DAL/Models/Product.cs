@@ -21,6 +21,7 @@ namespace n_Tier_Architecture.DAL.Models
         public int? BrandId { get; set; }
         public Brand? Brand { get; set; }
         public string MainImage { get; set; }
-
+        //image relation
+        public List<ProductImage> SubImages { get; set; } = new List<ProductImage>();
     }
 }

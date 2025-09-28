@@ -20,5 +20,6 @@ namespace n_Tier_Architecture.DAL.DTO.Requests
 
         public int? BrandId { get; set; }
         public IFormFile MainImage { get; set; }
+        public List<IFormFile> SubImages {  get; set; }
     }
 }

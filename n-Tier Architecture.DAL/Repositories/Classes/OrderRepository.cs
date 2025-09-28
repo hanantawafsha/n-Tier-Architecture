@@ -30,5 +30,30 @@ namespace n_Tier_Architecture.DAL.Repositories.Classes
         {
             return await _context.Orders.Include(o => o.User).FirstOrDefaultAsync(o=> o.Id == orderId);
         }
+        public async Task<List<Order>> GetAllOrderForUserAsync(string userId)
+        {
+            return await _context.Orders.Include(o=>o.UserId).ToListAsync();  
+            //where
+        }
+        public async Task<List<Order>> GetOrderByStatusAsync(StatusOrderEnum status)
+        {
+            return await _context.Orders.Where(o =>o.StatusOrder == status)
+                .OrderByDescending(o=>o.ShippedDate).ToListAsync();
+
+        }
+        public async Task<bool> ChangeStatusAsync(int orderId, StatusOrderEnum newStatus)
+        {
+            var order = await _context.Orders.FindAsync(orderId);
+            if (order == null)
+            {
+                return false;
+            }
+            order.StatusOrder = newStatus;
+            var result = await _context.SaveChangesAsync();
+            return result > 0;
+        }
+
+
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Azure;
 using Azure.Core;
+using Microsoft.AspNetCore.Http;
 using n_Tier_Architecture.DAL.DTO.Requests;
 using n_Tier_Architecture.DAL.DTO.Responses;
 using n_Tier_Architecture.DAL.Models;
@@ -13,7 +14,8 @@ namespace n_Tier_Architecture.BLL.Services.Interfaces
 {
     public interface IProductService : IGenericService<ProductRequest, ProductResponse, Product>
     {
-       Task<int> CreateFile(ProductRequest request);
+       Task<int> CreateProduct(ProductRequest request);
+        Task<List<ProductResponse>> GelAllProductsAsync(HttpRequest request, bool onlyActive = false);
 
     }
 }

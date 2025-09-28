@@ -10,6 +10,7 @@ namespace n_Tier_Architecture.BLL.Services.Interfaces
     public interface IFileService
     {
         Task<string> UploadAsync(IFormFile file);
+        Task<List<string>> UploadManyAsync(List<IFormFile> files);
         //delete files
     }
 }

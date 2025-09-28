@@ -15,6 +15,8 @@ namespace n_Tier_Architecture.DAL.DTO.Responses
         public int Quantity { get; set; }
         [JsonIgnore]
         public string MainImage { get; set; }
-        public string MainImageUrl => $"https://localhost:7084/images/{MainImage}";
+        public string MainImageUrl {  get; set; }
+        //=> $"https://localhost:7084/images/{MainImage}";
+        public List<string> SubImagesUrl { get; set; } = new List<string>();
     }
 }

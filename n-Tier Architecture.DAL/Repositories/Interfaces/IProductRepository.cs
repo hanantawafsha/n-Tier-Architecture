@@ -10,5 +10,6 @@ namespace n_Tier_Architecture.DAL.Repositories.Interfaces
     public interface IProductRepository:IGenericRepository<Product>
     {
         Task DescreaseQuantityAsync(List<(int productId, int quantity)>items);
+        Task<List<Product>> GelAllProductsWithImageAsync();
     }
 }

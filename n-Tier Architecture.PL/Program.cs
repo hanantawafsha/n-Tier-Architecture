@@ -16,6 +16,7 @@ using n_Tier_Architecture.PL.Utilities;
 using Scalar;
 using Scalar.AspNetCore;
 using Stripe;
+using Stripe.Climate;
 using System.Text;
 //using MyFileService = n_Tier_Architecture.BLL.Services.Classes.FileService;
 //using MyProductService = n_Tier_Architecture.BLL.Services.Classes.ProductService;
@@ -33,6 +34,15 @@ namespace n_Tier_Architecture.PL
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
 
+            //allow any
+            var userPolicy = "";
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: userPolicy, policy =>
+                {
+                    policy.AllowAnyOrigin();
+                });
+            });
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -59,6 +69,8 @@ namespace n_Tier_Architecture.PL
             builder.Services.AddScoped<ICheckOutRepository, CheckOutRepository>();
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
             builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 
 
 
@@ -71,6 +83,9 @@ namespace n_Tier_Architecture.PL
             builder.Services.AddScoped<IProductService, n_Tier_Architecture.BLL.Services.Classes.ProductService>();
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<ICheckOutService, CheckOutService>();
+            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IOrderService, n_Tier_Architecture.BLL.Services.Classes.OrderService>();
+
 
 
 
@@ -114,6 +129,8 @@ namespace n_Tier_Architecture.PL
 
             var app = builder.Build();
 
+           
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -129,6 +146,8 @@ namespace n_Tier_Architecture.PL
 
             app.UseHttpsRedirection();
             app.UseAuthentication();
+            //add policy
+            app.UseCors(userPolicy);
             app.UseAuthorization();
             // static url - images
             app.UseStaticFiles();

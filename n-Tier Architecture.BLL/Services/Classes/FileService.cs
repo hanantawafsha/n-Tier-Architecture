@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace n_Tier_Architecture.BLL.Services.Classes
 {
-    public  class FileService : IFileService
+    public class FileService : IFileService
     {
         public async Task<string> UploadAsync(IFormFile file)
         {
             if (file != null && file.Length > 0)
             {
-              var fileName =  Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-               //adding uploaded file to image folder 
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images",fileName);
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                //adding uploaded file to image folder 
+                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", fileName);
                 using (var stream = File.Create(filePath))
                 {
                     await file.CopyToAsync(stream);
@@ -25,6 +25,26 @@ namespace n_Tier_Architecture.BLL.Services.Classes
                 return fileName;
             }
             throw new Exception("error ");
+        }
+        public async Task<List<string>> UploadManyAsync(List<IFormFile> files)
+        {
+            var fileNames = new List<string>();
+            foreach (var file in files)
+            {
+                if (file != null && file.Length > 0)
+                {
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                    //adding uploaded file to image folder 
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", fileName);
+                    using (var stream = File.Create(filePath))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+                    fileNames.Add(fileName);
+                }
+            }
+            return fileNames;
+
         }
     }
 }
