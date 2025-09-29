@@ -18,5 +18,7 @@ namespace n_Tier_Architecture.DAL.DTO.Responses
         public string MainImageUrl {  get; set; }
         //=> $"https://localhost:7084/images/{MainImage}";
         public List<string> SubImagesUrl { get; set; } = new List<string>();
+
+        public List<ReviewResponse> Reviews { get; set; } = new List<ReviewResponse>();
     }
 }

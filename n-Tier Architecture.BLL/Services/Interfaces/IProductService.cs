@@ -15,7 +15,7 @@ namespace n_Tier_Architecture.BLL.Services.Interfaces
     public interface IProductService : IGenericService<ProductRequest, ProductResponse, Product>
     {
        Task<int> CreateProduct(ProductRequest request);
-        Task<List<ProductResponse>> GelAllProductsAsync(HttpRequest request, bool onlyActive = false);
+        Task<List<ProductResponse>> GelAllProductsAsync(HttpRequest request, bool onlyActive = false, int pageNumber = 1, int pageSize = 1);
 
     }
 }

@@ -49,7 +49,7 @@ namespace n_Tier_Architecture.BLL.Services.Classes
             return _repository.Add(product);
         }
         
-        public async Task<List<ProductResponse>> GelAllProductsAsync(HttpRequest request,bool onlyActive=false)
+        public async Task<List<ProductResponse>> GelAllProductsAsync(HttpRequest request,bool onlyActive=false,int pageNumber =1, int pageSize =1)
         {
             var products = await _repository.GelAllProductsWithImageAsync();
 
@@ -57,12 +57,22 @@ namespace n_Tier_Architecture.BLL.Services.Classes
             {
                 products=products.Where(p=>p.Status==Status.Active).ToList();
             }
-            return products.Select(p => new ProductResponse
+            //pagination 
+            var pageProducts = products.Skip((pageNumber  - 1) * pageSize).Take(pageSize);
+            return pageProducts.Select(p => new ProductResponse
             {
                 Name = p.Name,
                 Quantity = p.Quantity,
                 MainImageUrl = $"{request.Scheme}://{request.Host}/Images/{p.MainImage}",
-                SubImagesUrl = p.SubImages.Select(img => $"{request.Scheme}://{request.Host}/Images/{img.ImageName}").ToList()
+                SubImagesUrl = p.SubImages.Select(img => $"{request.Scheme}://{request.Host}/Images/{img.ImageName}").ToList(),
+                Reviews = p.Reviews.Select(r=> new ReviewResponse
+                {
+                    Id = r.Id,
+                    FullName=r.User.FullName,
+                    Comment = r.Comment,
+                    Rate = r.Rate,
+
+                }).ToList()
             }).ToList();
         }
 

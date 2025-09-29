@@ -23,5 +23,6 @@ namespace n_Tier_Architecture.DAL.Models
         public string MainImage { get; set; }
         //image relation
         public List<ProductImage> SubImages { get; set; } = new List<ProductImage>();
+        public List<Review> Reviews { get; set; } = new List<Review> { };
     }
 }

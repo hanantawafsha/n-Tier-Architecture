@@ -37,5 +37,8 @@ namespace n_Tier_Architecture.DAL.Models
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
 
+        //order items 
+        public List<OrderItem> OrderItems { get; set; }
+
     }
 }

@@ -29,9 +29,9 @@ namespace n_Tier_Architecture.PL.Areas.Admin.Controllers
 
         }
         [HttpGet("")]
-        public async Task<ActionResult<List<ProductResponse>>> GetAllProductsAsync()
+        public async Task<ActionResult<List<ProductResponse>>> GetAllProductsAsync([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 5)
         {
-            var products = await _productService.GelAllProductsAsync(Request);
+            var products = await _productService.GelAllProductsAsync(Request,false, pageNumber, pageSize);
             return Ok(products);
         }
 

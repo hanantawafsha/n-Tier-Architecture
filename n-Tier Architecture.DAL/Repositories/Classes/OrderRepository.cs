@@ -53,6 +53,13 @@ namespace n_Tier_Architecture.DAL.Repositories.Classes
             return result > 0;
         }
 
+        public async Task<bool> UserHasApprovderOrderforProductAsync(string userId, int productId)
+        {
+            return await _context.Orders.Include(o => o.OrderItems).AnyAsync(e => e.UserId == userId 
+            && e.StatusOrder == StatusOrderEnum.Approved 
+            && e.OrderItems.Any(oi => oi.ProductId == productId));
+        }
+
 
 
     }

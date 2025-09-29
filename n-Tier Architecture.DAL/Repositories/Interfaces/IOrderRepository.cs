@@ -14,6 +14,7 @@ namespace n_Tier_Architecture.DAL.Repositories.Interfaces
         Task<bool> ChangeStatusAsync(int orderId, StatusOrderEnum newStatus);
         Task<List<Order>> GetAllOrderForUserAsync(string userId);
         Task<List<Order>> GetOrderByStatusAsync(StatusOrderEnum status);
+        Task<bool> UserHasApprovderOrderforProductAsync(string userId, int productId);
 
     }
 }

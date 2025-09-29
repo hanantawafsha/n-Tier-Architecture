@@ -18,6 +18,7 @@ namespace n_Tier_Architecture.DAL.Repositories.Classes
         public ProductRepository(ApplicationDbContext context) : base(context)
         {
             _context = context;
+
         }
         public async Task DescreaseQuantityAsync(List<(int productId, int quantity)> items)
         {
@@ -36,7 +37,7 @@ namespace n_Tier_Architecture.DAL.Repositories.Classes
         }
         public async Task<List<Product>> GelAllProductsWithImageAsync()
         {
-            return await _context.Products.Include(p=>p.SubImages).ToListAsync();
+            return await _context.Products.Include(p=>p.SubImages).Include(p=>p.Reviews).ThenInclude(r=>r.User).ToListAsync();
         }
     }
 }
