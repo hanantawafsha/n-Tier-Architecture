@@ -1,13 +1,14 @@
-﻿using n_Tier_Architecture.BLL.Services.Interfaces;
-using n_Tier_Architecture.DAL.Models;
-using n_Tier_Architecture.DAL.Repositories.Interfaces;
+﻿using n_Tier_Architecture.DAL.DTO.Responses;
+using NTierArchitecture.BLL.Services.Interfaces;
+using NTierArchitecture.DAL.Models;
+using NTierArchitecture.DAL.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace n_Tier_Architecture.BLL.Services.Classes
+namespace NTierArchitecture.BLL.Services.Classes
 {
     public class OrderService:IOrderService
     {
@@ -23,12 +24,18 @@ namespace n_Tier_Architecture.BLL.Services.Classes
             return await _orderRepository.AddAsync(order);
         }
 
+        public async Task<List<OrderDto>> GetAllOrderDetailsAsync()
+        {
+
+            return await _orderRepository.GetAllOrdersDtoAsync();
+        }
+
         public async Task<bool> ChangeStatusAsync(int orderId, StatusOrderEnum newStatus)
         {
             return await _orderRepository.ChangeStatusAsync(orderId, newStatus);
         }
 
-        public async Task<List<Order>> GetAllOrderForUserAsync(string userId)
+        public async Task<List<OrderDto>> GetAllOrderForUserAsync(string userId)
         {
             return await _orderRepository.GetAllOrderForUserAsync(userId);
         }

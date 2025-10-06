@@ -1,14 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using n_Tier_Architecture.DAL.Data;
-using n_Tier_Architecture.DAL.Models;
-using n_Tier_Architecture.DAL.Repositories.Interfaces;
+using n_Tier_Architecture.DAL.DTO.Responses;
+using NTierArchitecture.DAL.Data;
+using NTierArchitecture.DAL.Models;
+using NTierArchitecture.DAL.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace n_Tier_Architecture.DAL.Repositories.Classes
+namespace NTierArchitecture.DAL.Repositories.Classes
 {
     public class OrderRepository:IOrderRepository
     {
@@ -28,13 +29,67 @@ namespace n_Tier_Architecture.DAL.Repositories.Classes
 
         public async Task<Order?> GetUserByOrderAsync(int orderId)
         {
+
             return await _context.Orders.Include(o => o.User).FirstOrDefaultAsync(o=> o.Id == orderId);
         }
-        public async Task<List<Order>> GetAllOrderForUserAsync(string userId)
+       
+        public async Task<List<OrderDto>> GetAllOrdersDtoAsync()
         {
-            return await _context.Orders.Include(o=>o.UserId).ToListAsync();  
-            //where
+            var orders = await _context.Orders
+                .Include(o => o.User)
+                .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.Product)
+                .ToListAsync();
+
+            var ordersDto =  orders.Select(o => new OrderDto
+            {
+                Id = o.Id,
+                StatusOrder = o.StatusOrder,
+                TotalPrice = o.TotalPrice,
+                ShippedDate = o.ShippedDate,
+                UserFullName = o.User.FullName,
+                Items = o.OrderItems.Select(oi => new OrderItemDto
+                {
+                    ProductId = oi.ProductId,
+                    ProductName = oi.Product.Name,
+                    Price = oi.Price,
+                    Count = oi.Count,
+                    TotalPrice = oi.TotalPrice
+                }).ToList()
+            }).ToList();
+
+            return ordersDto;
+        
         }
+        public async Task<List<OrderDto>> GetAllOrderForUserAsync(string userId)
+        {
+            var orders = await _context.Orders
+                .Where(o => o.UserId == userId)
+                .Include(o => o.OrderItems)
+                    .ThenInclude(oi => oi.Product)
+                .Include(o => o.User)
+                .ToListAsync();
+
+            var ordersDto = orders.Select(o => new OrderDto
+            {
+                Id = o.Id,
+                StatusOrder = o.StatusOrder,
+                TotalPrice = o.TotalPrice,
+                ShippedDate = o.ShippedDate,
+                UserFullName = o.User.FullName,
+                Items = o.OrderItems.Select(oi => new OrderItemDto
+                {
+                    ProductId = oi.ProductId,
+                    ProductName = oi.Product.Name,
+                    Price = oi.Price,
+                    Count = oi.Count,
+                    TotalPrice = oi.TotalPrice
+                }).ToList()
+            }).ToList();
+
+            return ordersDto;
+        }
+
         public async Task<List<Order>> GetOrderByStatusAsync(StatusOrderEnum status)
         {
             return await _context.Orders.Where(o =>o.StatusOrder == status)
@@ -55,7 +110,8 @@ namespace n_Tier_Architecture.DAL.Repositories.Classes
 
         public async Task<bool> UserHasApprovderOrderforProductAsync(string userId, int productId)
         {
-            return await _context.Orders.Include(o => o.OrderItems).AnyAsync(e => e.UserId == userId 
+            return await _context.Orders.Include(o => o.OrderItems)
+                .AnyAsync(e => e.UserId == userId 
             && e.StatusOrder == StatusOrderEnum.Approved 
             && e.OrderItems.Any(oi => oi.ProductId == productId));
         }

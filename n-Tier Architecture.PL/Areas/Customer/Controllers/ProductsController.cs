@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using n_Tier_Architecture.BLL.Services.Interfaces;
+using NTierArchitecture.BLL.Services.Interfaces;
 
-namespace n_Tier_Architecture.PL.Areas.Customer.Controllers
+namespace NTierArchitecture.PL.Areas.Customer.Controllers
 {
     [Route("api/[area]/[controller]")]
     [ApiController]

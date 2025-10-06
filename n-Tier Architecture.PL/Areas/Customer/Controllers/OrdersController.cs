@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using n_Tier_Architecture.BLL.Services.Interfaces;
+using n_Tier_Architecture.DAL.DTO.Responses;
+using NTierArchitecture.BLL.Services.Interfaces;
 
-namespace n_Tier_Architecture.PL.Areas.Customer.Controllers
+namespace NTierArchitecture.PL.Areas.Customer.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[area]/[controller]")]
     [ApiController]
+    [Area("Customer")]
+    [Authorize(Roles = "Customer")]
     public class OrdersController : ControllerBase
     {
         private readonly IOrderService _orderService;
@@ -17,10 +21,15 @@ namespace n_Tier_Architecture.PL.Areas.Customer.Controllers
 
         [HttpGet("{userId}")]
         //get order for specific user.
-        public async Task<IActionResult> GetAll([FromRoute] string userId)
+        public async Task<ActionResult<List<OrderDto>>> GetAll([FromRoute] string userId)
         {
             var result = await _orderService.GetAllOrderForUserAsync(userId);
             return Ok(result);
         }
+       // [HttpPost("")]
+        //public async Task<IActionResult> AddAsync()
+        //{
+
+        //}
     }
 }

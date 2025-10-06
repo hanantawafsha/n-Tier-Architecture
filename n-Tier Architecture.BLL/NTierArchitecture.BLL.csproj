@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\n-Tier Architecture.DAL\n-Tier Architecture.DAL.csproj" />
+    <ProjectReference Include="..\n-Tier Architecture.DAL\NTierArchitecture.DAL.csproj" />
   </ItemGroup>
 
 </Project>

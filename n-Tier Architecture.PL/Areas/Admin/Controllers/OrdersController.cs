@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using n_Tier_Architecture.BLL.Services.Interfaces;
-using n_Tier_Architecture.DAL.Models;
+using n_Tier_Architecture.DAL.DTO.Responses;
+using NTierArchitecture.BLL.Services.Interfaces;
+using NTierArchitecture.DAL.Models;
 
-namespace n_Tier_Architecture.PL.Areas.Admin.Controllers
+namespace NTierArchitecture.PL.Areas.Admin.Controllers
 {
     [Route("api/[area]/[controller]")]
     [ApiController]
@@ -30,6 +31,12 @@ namespace n_Tier_Architecture.PL.Areas.Admin.Controllers
         public async Task<IActionResult> ChangeOrderStatus (int orderId, [FromBody] StatusOrderEnum newStatus)
         {
             var result = await _orderService.ChangeStatusAsync(orderId, newStatus);
+            return Ok(result);
+        }
+        [HttpGet("")]
+        public async Task<ActionResult<List<OrderDto>>> GetAllOrders()
+        {
+            var result = await _orderService.GetAllOrderDetailsAsync();
             return Ok(result);
         }
     }

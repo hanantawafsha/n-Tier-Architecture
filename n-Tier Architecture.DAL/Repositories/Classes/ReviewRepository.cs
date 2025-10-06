@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using n_Tier_Architecture.DAL.Data;
-using n_Tier_Architecture.DAL.Models;
-using n_Tier_Architecture.DAL.Repositories.Interfaces;
+using NTierArchitecture.DAL.Data;
+using NTierArchitecture.DAL.Models;
+using NTierArchitecture.DAL.Repositories.Interfaces;
 
 
-namespace n_Tier_Architecture.DAL.Repositories.Classes
+namespace NTierArchitecture.DAL.Repositories.Classes
 {
     public class ReviewRepository : IReviewRepository
     {
@@ -28,3 +28,4 @@ namespace n_Tier_Architecture.DAL.Repositories.Classes
         }
     }
 }
+            

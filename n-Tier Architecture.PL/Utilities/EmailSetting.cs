@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Mail;
 
-namespace n_Tier_Architecture.PL.Utilities
+namespace NTierArchitecture.PL.Utilities
 {
     public class EmailSetting : IEmailSender
     {

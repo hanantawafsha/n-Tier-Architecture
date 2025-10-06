@@ -18,11 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\n-Tier Architecture.BLL\n-Tier Architecture.BLL.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\n-Tier Architecture.BLL\NTierArchitecture.BLL.csproj" />
   </ItemGroup>
 
   <ItemGroup>

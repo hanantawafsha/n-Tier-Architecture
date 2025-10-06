@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using n_Tier_Architecture.DAL.Models;
+using NTierArchitecture.DAL.Models;
 
 
-namespace n_Tier_Architecture.DAL.Data
+namespace NTierArchitecture.DAL.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

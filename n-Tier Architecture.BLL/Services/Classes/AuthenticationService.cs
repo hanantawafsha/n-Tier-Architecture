@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using n_Tier_Architecture.BLL.Services.Interfaces;
-using n_Tier_Architecture.DAL.DTO.Requests;
-using n_Tier_Architecture.DAL.DTO.Responses;
-using n_Tier_Architecture.DAL.Models;
+using NTierArchitecture.BLL.Services.Interfaces;
+using NTierArchitecture.DAL.DTO.Requests;
+using NTierArchitecture.DAL.DTO.Responses;
+using NTierArchitecture.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -16,7 +16,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace n_Tier_Architecture.BLL.Services.Classes
+namespace NTierArchitecture.BLL.Services.Classes
 {
     public class AuthenticationService : IAuthenticationService
     {

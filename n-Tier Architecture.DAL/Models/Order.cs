@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace n_Tier_Architecture.DAL.Models
+namespace NTierArchitecture.DAL.Models
 {
    public enum StatusOrderEnum
     {
@@ -22,7 +22,7 @@ namespace n_Tier_Architecture.DAL.Models
     public class Order:BaseModel
     {
         public StatusOrderEnum StatusOrder { get; set; } = StatusOrderEnum.Pending;
-        public DateTime ShippedDate { get; set; }
+        public DateTime? ShippedDate { get; set; }
         public decimal TotalPrice { get; set; }
    //payment
    public PaymnetMethodEnum PaymnetMethod { get; set; }
@@ -35,10 +35,10 @@ namespace n_Tier_Architecture.DAL.Models
 
         //user info - relation
         public string UserId { get; set; }
-        public ApplicationUser User { get; set; }
+        public ApplicationUser User{ get; set; }
 
         //order items 
-        public List<OrderItem> OrderItems { get; set; }
+        public List<OrderItem> OrderItems { get; set; } = new();
 
     }
 }

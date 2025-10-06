@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
-using n_Tier_Architecture.DAL.DTO.Requests;
-using n_Tier_Architecture.DAL.DTO.Responses;
+using NTierArchitecture.DAL.DTO.Requests;
+using NTierArchitecture.DAL.DTO.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace n_Tier_Architecture.BLL.Services.Interfaces
+namespace NTierArchitecture.BLL.Services.Interfaces
 {
     public interface ICheckOutService
     {

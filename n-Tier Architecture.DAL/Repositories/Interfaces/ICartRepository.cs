@@ -1,7 +1,7 @@
-﻿using n_Tier_Architecture.DAL.Models;
+﻿using NTierArchitecture.DAL.Models;
 
 
-namespace n_Tier_Architecture.DAL.Repositories.Interfaces
+namespace NTierArchitecture.DAL.Repositories.Interfaces
 {
     public interface ICartRepository
     {

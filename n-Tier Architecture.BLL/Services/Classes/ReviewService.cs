@@ -1,11 +1,12 @@
 ﻿using Mapster;
-using n_Tier_Architecture.BLL.Services.Interfaces;
-using n_Tier_Architecture.DAL.DTO.Requests;
-using n_Tier_Architecture.DAL.Models;
-using n_Tier_Architecture.DAL.Repositories.Interfaces;
+using NTierArchitecture.BLL.Services.Interfaces;
+using NTierArchitecture.DAL.DTO.Requests;
+using NTierArchitecture.DAL.Models;
+using NTierArchitecture.DAL.Repositories.Classes;
+using NTierArchitecture.DAL.Repositories.Interfaces;
 
 
-namespace n_Tier_Architecture.BLL.Services.Classes
+namespace NTierArchitecture.BLL.Services.Classes
 {
     public class ReviewService : IReviewService
     {
@@ -31,3 +32,4 @@ namespace n_Tier_Architecture.BLL.Services.Classes
         }
     }
 }
+

@@ -1,0 +1,9 @@
+@NTierArchitecture.PL_HostAddress = https://ntiernew.runasp.net
+
+//https://ntiernew.runasp.net
+//http://localhost:5137
+
+GET {{NTierArchitecture.PL_HostAddress}}/scalar/v1
+Accept: application/json
+
+###

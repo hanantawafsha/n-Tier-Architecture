@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using n_Tier_Architecture.DAL.Data;
-using n_Tier_Architecture.DAL.Models;
+using NTierArchitecture.DAL.Data;
+using NTierArchitecture.DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace n_Tier_Architecture.DAL.Utilities
+namespace NTierArchitecture.DAL.Utilities
 {
     public class SeedData : ISeedData
     {

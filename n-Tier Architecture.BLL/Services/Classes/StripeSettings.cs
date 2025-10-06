@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace n_Tier_Architecture.BLL.Services.Classes
+namespace NTierArchitecture.BLL.Services.Classes
 {
     public class StripeSettings
     {

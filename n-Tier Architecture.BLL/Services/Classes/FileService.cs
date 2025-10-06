@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
-using n_Tier_Architecture.BLL.Services.Interfaces;
+using NTierArchitecture.BLL.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace n_Tier_Architecture.BLL.Services.Classes
+namespace NTierArchitecture.BLL.Services.Classes
 {
     public class FileService : IFileService
     {

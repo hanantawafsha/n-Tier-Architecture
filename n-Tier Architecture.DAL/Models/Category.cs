@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace n_Tier_Architecture.DAL.Models
+namespace NTierArchitecture.DAL.Models
 {
     public class Category:BaseModel
     {

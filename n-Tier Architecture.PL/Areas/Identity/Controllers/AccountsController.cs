@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using n_Tier_Architecture.BLL.Services.Interfaces;
-using n_Tier_Architecture.DAL.DTO.Responses;
-using n_Tier_Architecture.DAL.DTO.Requests;
+using NTierArchitecture.BLL.Services.Interfaces;
+using NTierArchitecture.DAL.DTO.Responses;
+using NTierArchitecture.DAL.DTO.Requests;
 
 
 
 
-namespace n_Tier_Architecture.PL.Areas.Identity.Controllers
+namespace NTierArchitecture.PL.Areas.Identity.Controllers
 {
     [Route("api/[area]/[controller]")]
     [ApiController]

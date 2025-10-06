@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using n_Tier_Architecture.BLL.Services.Utilities;
+using NTierArchitecture.BLL.Services.Utilities;
 using QuestPDF.Fluent;
 
-namespace n_Tier_Architecture.PL.Areas.Admin.Controllers
+namespace NTierArchitecture.PL.Areas.Admin.Controllers
 {
     [Route("api/[area]/[controller]")]
     [ApiController]

@@ -1,5 +1,5 @@
-﻿using n_Tier_Architecture.BLL.Services.Interfaces;
-using n_Tier_Architecture.DAL.Repositories.Interfaces;
+﻿using NTierArchitecture.BLL.Services.Interfaces;
+using NTierArchitecture.DAL.Repositories.Interfaces;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace n_Tier_Architecture.BLL.Services.Utilities
+namespace NTierArchitecture.BLL.Services.Utilities
 {
     public class ReportService
     {

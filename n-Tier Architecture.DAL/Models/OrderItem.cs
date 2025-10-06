@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace n_Tier_Architecture.DAL.Models
+namespace NTierArchitecture.DAL.Models
 {
     [PrimaryKey(nameof(OrderId),nameof(ProductId))]
     public class OrderItem:BaseModel

@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using n_Tier_Architecture.DAL.Data;
-using n_Tier_Architecture.DAL.Models;
-using n_Tier_Architecture.DAL.Repositories.Interfaces;
+using NTierArchitecture.DAL.Data;
+using NTierArchitecture.DAL.Models;
+using NTierArchitecture.DAL.Repositories.Interfaces;
 
-namespace n_Tier_Architecture.BLL.Services.Classes
+namespace NTierArchitecture.BLL.Services.Classes
 {
     public class CartRepository : ICartRepository
     {

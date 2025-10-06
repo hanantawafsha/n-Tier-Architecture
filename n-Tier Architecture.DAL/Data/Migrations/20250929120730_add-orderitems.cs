@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace n_Tier_Architecture.DAL.Data.Migrations
+namespace NTierArchitecture.DAL.Data.Migrations
 {
     /// <inheritdoc />
     public partial class addorderitems : Migration

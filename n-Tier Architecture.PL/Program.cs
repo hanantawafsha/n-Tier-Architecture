@@ -5,23 +5,23 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using n_Tier_Architecture.BLL.Services.Classes;
-using n_Tier_Architecture.BLL.Services.Interfaces;
-using n_Tier_Architecture.BLL.Services.Utilities;
-using n_Tier_Architecture.DAL.Data;
-using n_Tier_Architecture.DAL.Models;
-using n_Tier_Architecture.DAL.Repositories.Classes;
-using n_Tier_Architecture.DAL.Repositories.Interfaces;
-using n_Tier_Architecture.DAL.Utilities;
-using n_Tier_Architecture.PL.Utilities;
+using NTierArchitecture.BLL.Services.Classes;
+using NTierArchitecture.BLL.Services.Interfaces;
+using NTierArchitecture.BLL.Services.Utilities;
+using NTierArchitecture.DAL.Data;
+using NTierArchitecture.DAL.Models;
+using NTierArchitecture.DAL.Repositories.Classes;
+using NTierArchitecture.DAL.Repositories.Interfaces;
+using NTierArchitecture.DAL.Utilities;
+using NTierArchitecture.PL.Utilities;
 using Scalar;
 using Scalar.AspNetCore;
 using Stripe;
 using Stripe.Climate;
 using System.Text;
-//using MyFileService = n_Tier_Architecture.BLL.Services.Classes.FileService;
-//using MyProductService = n_Tier_Architecture.BLL.Services.Classes.ProductService;
-namespace n_Tier_Architecture.PL
+//using MyFileService = NTierArchitecture.BLL.Services.Classes.FileService;
+//using MyProductService = NTierArchitecture.BLL.Services.Classes.ProductService;
+namespace NTierArchitecture.PL
 {
     public class Program
     {
@@ -77,17 +77,17 @@ namespace n_Tier_Architecture.PL
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IBrandService, BrandService>();
             //builder.Services.AddScoped<IProductService,ProductService>();
-            builder.Services.AddScoped<IProductService, n_Tier_Architecture.BLL.Services.Classes.ProductService>();
+            builder.Services.AddScoped<IProductService, NTierArchitecture.BLL.Services.Classes.ProductService>();
             builder.Services.AddScoped<ICartService, CartService>();
             builder.Services.AddScoped<ICheckOutService, CheckOutService>();
             builder.Services.AddScoped<IUserService, UserService>();
-            builder.Services.AddScoped<IOrderService, n_Tier_Architecture.BLL.Services.Classes.OrderService>();
+            builder.Services.AddScoped<IOrderService, NTierArchitecture.BLL.Services.Classes.OrderService>();
             builder.Services.AddScoped<IReviewService, BLL.Services.Classes.ReviewService>();
 
             builder.Services.AddScoped<ISeedData, SeedData>();
             builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
             builder.Services.AddScoped<IEmailSender, EmailSetting>();
-            builder.Services.AddScoped<IFileService, n_Tier_Architecture.BLL.Services.Classes.FileService>();
+            builder.Services.AddScoped<IFileService, NTierArchitecture.BLL.Services.Classes.FileService>();
             builder.Services.AddScoped<ReportService>();
 
             // builder.Services.AddScoped<IFileService, FileService>();

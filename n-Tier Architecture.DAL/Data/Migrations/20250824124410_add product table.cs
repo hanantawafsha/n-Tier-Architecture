@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace n_Tier_Architecture.DAL.Migrations
+namespace NTierArchitecture.DAL.Migrations
 {
     /// <inheritdoc />
     public partial class addproducttable : Migration

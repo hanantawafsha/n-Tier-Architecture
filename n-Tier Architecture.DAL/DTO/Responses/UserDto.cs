@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace n_Tier_Architecture.DAL.DTO.Responses
+namespace NTierArchitecture.DAL.DTO.Responses
 {
     public class UserDto
     {

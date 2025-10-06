@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace n_Tier_Architecture.DAL.DTO.Responses
+namespace NTierArchitecture.DAL.DTO.Responses
 {
     public class BrandResponse
     {

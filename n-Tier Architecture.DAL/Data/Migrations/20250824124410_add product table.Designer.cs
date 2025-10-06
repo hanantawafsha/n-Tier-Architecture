@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using n_Tier_Architecture.DAL.Data;
+using NTierArchitecture.DAL.Data;
 
 #nullable disable
 
-namespace n_Tier_Architecture.DAL.Migrations
+namespace NTierArchitecture.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20250824124410_add product table")]
@@ -67,7 +67,7 @@ namespace n_Tier_Architecture.DAL.Migrations
                     b.ToTable("UserRoles", (string)null);
                 });
 
-            modelBuilder.Entity("n_Tier_Architecture.DAL.Models.Address", b =>
+            modelBuilder.Entity("NTierArchitecture.DAL.Models.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -94,7 +94,7 @@ namespace n_Tier_Architecture.DAL.Migrations
                     b.ToTable("Addresses", (string)null);
                 });
 
-            modelBuilder.Entity("n_Tier_Architecture.DAL.Models.ApplicationUser", b =>
+            modelBuilder.Entity("NTierArchitecture.DAL.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -174,7 +174,7 @@ namespace n_Tier_Architecture.DAL.Migrations
                     b.ToTable("Users", (string)null);
                 });
 
-            modelBuilder.Entity("n_Tier_Architecture.DAL.Models.Brand", b =>
+            modelBuilder.Entity("NTierArchitecture.DAL.Models.Brand", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -197,7 +197,7 @@ namespace n_Tier_Architecture.DAL.Migrations
                     b.ToTable("Brands", (string)null);
                 });
 
-            modelBuilder.Entity("n_Tier_Architecture.DAL.Models.Category", b =>
+            modelBuilder.Entity("NTierArchitecture.DAL.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -220,7 +220,7 @@ namespace n_Tier_Architecture.DAL.Migrations
                     b.ToTable("Categories", (string)null);
                 });
 
-            modelBuilder.Entity("n_Tier_Architecture.DAL.Models.Product", b =>
+            modelBuilder.Entity("NTierArchitecture.DAL.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -281,29 +281,29 @@ namespace n_Tier_Architecture.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("n_Tier_Architecture.DAL.Models.ApplicationUser", null)
+                    b.HasOne("NTierArchitecture.DAL.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("n_Tier_Architecture.DAL.Models.ApplicationUser", b =>
+            modelBuilder.Entity("NTierArchitecture.DAL.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("n_Tier_Architecture.DAL.Models.Address", "Address")
+                    b.HasOne("NTierArchitecture.DAL.Models.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId");
 
                     b.Navigation("Address");
                 });
 
-            modelBuilder.Entity("n_Tier_Architecture.DAL.Models.Product", b =>
+            modelBuilder.Entity("NTierArchitecture.DAL.Models.Product", b =>
                 {
-                    b.HasOne("n_Tier_Architecture.DAL.Models.Brand", "Brand")
+                    b.HasOne("NTierArchitecture.DAL.Models.Brand", "Brand")
                         .WithMany("Products")
                         .HasForeignKey("BrandId");
 
-                    b.HasOne("n_Tier_Architecture.DAL.Models.Category", "Category")
+                    b.HasOne("NTierArchitecture.DAL.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -314,12 +314,12 @@ namespace n_Tier_Architecture.DAL.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("n_Tier_Architecture.DAL.Models.Brand", b =>
+            modelBuilder.Entity("NTierArchitecture.DAL.Models.Brand", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("n_Tier_Architecture.DAL.Models.Category", b =>
+            modelBuilder.Entity("NTierArchitecture.DAL.Models.Category", b =>
                 {
                     b.Navigation("Products");
                 });
